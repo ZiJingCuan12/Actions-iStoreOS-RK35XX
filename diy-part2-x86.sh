@@ -44,3 +44,19 @@ git clone --depth=1 -b main https://github.com/xiaomeng9597/istoreos-settings pa
 echo "CONFIG_PACKAGE_luci-app-eqosplus=y
 CONFIG_PACKAGE_luci-i18n-eqosplus-zh-cn=y" >> .config
 git clone --depth=1 https://github.com/sirpdboy/luci-app-eqosplus package/luci-app-eqosplus
+
+# =========================================================
+# Passwall 插件配置 (追加到 diy-part2-x86.sh 末尾)
+# =========================================================
+
+# 1. 下载 Passwall 及其依赖的源码
+# 下面这两个仓库是 Passwall 的官方/常用维护仓库
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-package.git package/openwrt-passwall
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+
+# 2. 配置 .config 默认选中 Passwall 和常用核心
+# 注意：X86 性能较强，建议同时把 xray 和 sing-box 核心都带上
+echo "CONFIG_PACKAGE_luci-app-passwall=y
+CONFIG_PACKAGE_luci-i18n-passwall-zh-cn=y
+CONFIG_PACKAGE_xray-core=y
+CONFIG_PACKAGE_sing-box=y" >> .config
